@@ -132,7 +132,7 @@ defmodule Mix.Tasks.Dialyzer.Plt do
   defp core_plt_contains?(app, plt_file) do
     app = to_char_list(app)
     plt_file = to_char_list(plt_file)
-    IO.puts "app: #{app}" <> app"
+    IO.puts "app: #{app}"
     IO.puts "plt_file: #{plt_file}"
     :dialyzer.plt_info(plt_file)
     |> elem(1) |> Keyword.get(:files)
