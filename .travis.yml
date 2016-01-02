@@ -28,9 +28,6 @@ before_script:
 
 script: 
   - "MIX_ENV=prod mix do deps.clean --all, deps.get, compile, hex.build"
-  - "MIX_ENV=test mix do test --trace, dialyzer "
-
-
 cache:
   directories:
   - $HOME/.mix/archives
