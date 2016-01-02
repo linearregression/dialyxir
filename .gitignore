@@ -3,3 +3,6 @@
 .depsolver.plt
 erl_crash.dump
 *.ez
+*.*~
+*~
+
