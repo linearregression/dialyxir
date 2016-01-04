@@ -83,7 +83,7 @@ before_script:
   - mix do archive.build, archive.install --force
 
 script: 
-  - "MIX_ENV=prod mix do deps.clean --all, deps.get, compile, hex.build"
+  - "MIX_ENV=prod mix do deps.clean --all, deps.get, compile, hex.build, dialyzer.plt"
 cache:
   directories:
   - $HOME/.mix/archives
