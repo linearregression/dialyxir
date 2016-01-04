@@ -7,8 +7,27 @@ defmodule Dialyxir.Mixfile do
       version: "0.3.1",
       elixir: "~> 1.0",
       description: description,
+      source_url: project_url,
+      homepage_url: project_url,
       package: package,
-      deps: []
+      deps: [],
+      dialyzer: [
+         plt_add_apps: [:asn1,
+           :crypto,
+           :edoc,
+           :erts,
+           :eunit,
+           :inets,
+           :kernel,
+           :mnesia,
+           :public_key,
+           :ssl,
+           :stdlib,
+           :xmerl
+          ],
+       plt_file: "plts/#{plt_filename}",
+       flags: ["--no_native"]
+     ],
     ]
   end
 
@@ -18,10 +37,24 @@ defmodule Dialyxir.Mixfile do
     """
   end
 
+  defp project_url do
+    """
+    "https://github.com/jeremyjh/dialyxir"
+    """
+  end
+
+  def plt_filename do
+    "otp-#{otp_release}-elixir-#{elixir_release}.plt"
+  end
+
+  def application do
+    [applications: [:logger]]
+  end
+
   defp package do
     [files: ["lib", "mix.exs", "README.md", "LICENSE"],
      maintainers: ["Jeremy Huffman"],
      licenses: ["Apache 2.0"],
-     links: %{"GitHub" => "https://github.com/jeremyjh/dialyxir"}]
+     links: %{"GitHub" => project_url}]
   end
 end
