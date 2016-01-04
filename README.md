@@ -1,4 +1,5 @@
 # Dialyxir
+[![Build Status](https://travis-ci.org/linearregression/dialyxir.svg?branch=master)](https://travis-ci.org/linearregression/dialyxir)
 
 Mix tasks to simplify use of Dialyzer in Elixir projects.
 
