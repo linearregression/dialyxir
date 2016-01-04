@@ -57,4 +57,18 @@ defmodule Dialyxir.Mixfile do
      licenses: ["Apache 2.0"],
      links: %{"GitHub" => project_url}]
   end
+
+  defp otp_release do
+    case System.get_env("TRAVIS_OTP_RELEASE") do
+      nil     -> :erlang.system_info(:otp_release)
+      release -> release
+    end
+  end
+
+  defp elixir_release do
+    case System.get_env("TRAVIS_ELIXIR_VERSION") do
+      nil     -> System.version
+      release -> release
+    end
+  end
 end
