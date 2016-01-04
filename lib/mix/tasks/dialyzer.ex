@@ -43,10 +43,10 @@ defmodule Mix.Tasks.Dialyzer do
     {dargs, halt} = Enum.partition(dargs, &(&1 != "--halt-exit-status"))
     if compile == [], do: Mix.Project.compile([])
     args = List.flatten [dargs, "--no_check_plt", "--plt", "#{Plt.plt_file}", dialyzer_flags, dialyzer_paths]
-    puts "Starting Dialyzer"
-    puts "dialyzer " <> Enum.join(args, " ")
+    IO.puts "Starting Dialyzer"
+    IO.puts "dialyzer " <> Enum.join(args, " ")
     {ret, exit_status} = System.cmd("dialyzer", args, [])
-    puts ret
+    IO.puts ret
     if halt != [] do
       :erlang.halt(exit_status)
     end

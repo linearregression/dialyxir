@@ -57,10 +57,10 @@ defmodule Mix.Tasks.Dialyzer.Plt do
           build_plt
           if need_add?, do: add_plt
         else
-          if need_add?, do: add_plt, else: puts "Nothing to do."
+          if need_add?, do: add_plt, else: IO.puts "Nothing to do."
         end
     catch
-        x -> puts "Exception: #{x}"
+        x -> IO.puts "Exception: #{x}"
      end   
   end
 
@@ -70,11 +70,11 @@ defmodule Mix.Tasks.Dialyzer.Plt do
   end
 
   defp build_plt do
-    puts "Starting PLT Core Build ... this will take awhile"
+    IO.puts "Starting PLT Core Build ... this will take awhile"
     args = List.flatten ["--output_plt", "#{plt_file}", "--build_plt", include_pa, "--apps", include_apps, "-r", ex_lib_path]
-    puts "dialyzer " <> Enum.join(args, " ")
+    IO.puts "dialyzer " <> Enum.join(args, " ")
     {ret, _} = cmd("dialyzer", args, [])
-    puts ret
+    IO.puts ret
   end
 
   defp include_apps, do: Enum.map(cons_apps, &to_binary_if_atom(&1))
@@ -112,13 +112,13 @@ defmodule Mix.Tasks.Dialyzer.Plt do
 
   defp add_plt do
     apps = missing_apps
-    puts "Some apps are missing and will be added:"
-    puts Enum.join(apps, " ")
-    puts "Adding Erlang/OTP Apps to existing PLT ... this will take a little time"
+    IO.puts "Some apps are missing and will be added:"
+    IO.puts Enum.join(apps, " ")
+    IO.puts "Adding Erlang/OTP Apps to existing PLT ... this will take a little time"
     args = List.flatten ["--add_to_plt", "--plt", "#{plt_file}", include_pa, "--apps", apps]
-    puts "dialyzer " <> Enum.join(args, " ")
+    IO.puts "dialyzer " <> Enum.join(args, " ")
     {ret, _} = cmd("dialyzer", args, [])
-    puts ret
+    IO.puts ret
   end
 
   defp missing_apps do
